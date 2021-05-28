@@ -10942,3 +10942,29 @@ a.text-dark:focus {
   }
 }
 
+.my_navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.my_navbar-brand {
+  display: inline-block;
+  padding-top: 0.32rem;
+  padding-bottom: 0.32rem;
+  font-size: 1.125rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.my_navbar-brand a {
+  background-color: #222222 !important;
+}
+
+ul.navbar-nav.mr-auto li {
+  padding-right: 20px;
+}
+
