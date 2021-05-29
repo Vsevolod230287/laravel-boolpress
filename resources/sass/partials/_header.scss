@@ -1,0 +1,25 @@
+header {
+    background-color: black;
+
+    .navbar-brand {
+        font-weight: 900;
+        padding-bottom: 7px;
+        font-size: 30px;
+    }
+
+    a#navbarDropdown {
+        font-size: 20px;
+    }
+
+    ul.navbar-nav {
+        padding-left: 10px;
+        padding-top: 4px;
+
+        a {
+            color: #CC9999;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 20px;
+        }
+    }
+}

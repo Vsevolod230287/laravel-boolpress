@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+body {
+    height: 100vh;
+    background-color: #CC9999;
+
+    #app {
+        height: 100%;
+
+        .dropdown-menu {
+            background-color: #4e48aa;
+        }
+
+        main {
+            height: 100%;
+        }
+    }
+}

@@ -10,6 +10,5 @@ class CategoryController extends Controller
     public function index(string $slug)
     {
         $category = Category::with('posts')->where('slug', '=', $slug)->first();
-        dd($category);
     }
 }

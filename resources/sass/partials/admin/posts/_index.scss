@@ -1,0 +1,26 @@
+.admin-posts-index {
+
+    height: 100%;
+
+    .box-side-bar {
+        display: inline-block;
+        height: 100%;
+
+        ul {
+            list-style: none;
+        }
+    }
+
+    .new-post {
+        display: inline-block;
+        bottom: 100px;
+        background-color: lightblue;
+        border-radius: 7px;
+        padding: 10px 30px;
+        margin-bottom: 20px;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
