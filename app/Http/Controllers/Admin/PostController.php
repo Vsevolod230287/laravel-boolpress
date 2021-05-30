@@ -111,12 +111,11 @@ class PostController extends Controller
 
     private function generateSlug(string $title, bool $change = true, string $old_slug = '')
     {
-        $slug = Str::slug($title, '-');
-
         if (!$change) {
             return $old_slug;
         }
 
+        $slug = Str::slug($title, '-');
         $slug_base = $slug;
         $contatore = 1;
         $post_with_slug = Post::where('slug', '=', $slug)->first();

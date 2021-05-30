@@ -4,9 +4,9 @@
 
     <div class="row justify-content-center">
       @foreach ($posts as $post)
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">{{ $post->title }}</div>
+
+            <div class="card col-3 py-4 pr-4 my-4 mx-4">
+                <div class="card-header">{{ $post->slug }}</div>
 
                 <div class="card-body">
                     {{ $post->content }}
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
         @endforeach
     </div>
 </div>
