@@ -40,6 +40,7 @@
                         </a>
                         @endif
                     </h4>
+                    <img src="{{asset('storage/' . $post->cover)}}" alt="{{$post->title}}">
                     <div class="card-body">
                         Contenuto: {{ $post->content }}
                         <div class="">

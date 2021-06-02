@@ -2,68 +2,81 @@
 
 @section('content')
 <div class="admin-posts-edit row">
-  <div class="box-side-bar col-2 ">
+    <div class="box-side-bar col-2 ">
 
 
-      <div class="">
-          @if (session('status'))
-          <div class="alert alert-success" role="alert">
-              {{ session('status') }}
-          </div>
-          @endif
-
-          {{ __('You are logged in!') }}
-      </div>
-      <div class="side-bar ">
-          <ul>
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="{{route('admin.posts.index')}}">Posts</a></li>
-              <li><a href="#">Users</a></li>
-              <li><a href="#">Categories</a></li>
-              <li><a href="#">Tags</a></li>
-          </ul>
-      </div>
-  </div>
-
-
-
-            <div class="col-8">
-                <form action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post">
-                    @csrf
-                    @method('PATCH')
-
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <select class="form-control @error('category') is-invalid @enderror" id="category" type="text" name="category_id">
-                            <option value="">Select</option>
-                            @foreach ($categories as $category)
-                            <option value="{{$category->id}}" {{ $category->id == old('category_id', $post->category_id) ? 'selected' : ''}} >{{$category->name}}</option>
-                 @endforeach
-              </select>
-              @error('category_id')
-                <small class=" text-danger">{{ $message }}</small>
-              @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input class="form-control @error('title') is-invalid @enderror" id="title" type="text" name="title" value="{{ old('title', $post->title) }}">
-                        @error('title')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="content">Content</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content"> {{ old('content', $post->content) }}</textarea>
-                        @error('content')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <button class="btn btn-primary" type="submit">Salva</button>
-                </form>
+        <div class="">
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
             </div>
+            @endif
+
+            {{ __('You are logged in!') }}
         </div>
+        <div class="side-bar ">
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="{{route('admin.posts.index')}}">Posts</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Tags</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="col-8">
+        <form action="{{route('admin.posts.update', ['post' => $post->id])}}" enctype="multipart/form-data" method="post">
+            @csrf
+            @method('PATCH')
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control @error('category') is-invalid @enderror" id="category" type="text" name="category_id">
+                    <option value="">Select</option>
+                    @foreach ($categories as $category)
+                    <option value="{{$category->id}}" {{ $category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                <small class=" text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control @error('title') is-invalid @enderror" id="title" type="text" name="title" value="{{ old('title', $post->title) }}">
+                @error('title')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content"> {{ old('content', $post->content) }}</textarea>
+                @error('content')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="">
+                <img src="{{asset('storage/' . $post->cover)}}" alt="">
+            </div>
+
+            <div class="form-group">
+                <label for="Cover">Cover</label>
+                <input class="form-control-file @error('cover') is-invalid @enderror" id="cover" type="file" name="cover" value="">
+                @error('cover')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <button class="btn btn-primary" type="submit">Salva</button>
+        </form>
+    </div>
+</div>
 </div>
 @endsection

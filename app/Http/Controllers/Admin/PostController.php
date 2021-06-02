@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Post;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendNewMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -39,16 +42,23 @@ class PostController extends Controller
         $request->validate([
         'category_id'=>'exists:categories,id|nullable',
         'title'=>'required|string|max:255',
-        'content'=> 'required|string'
+        'content'=> 'required|string',
+        'cover' => 'image|max:200|nullable'
       ]);
 
         $data= $request->all();
 
+        $cover = null;
+        if (array_key_exists('cover', $data)) {
+            $cover = Storage::put('uploads', $data['cover']);
+        }
+
         $post = new Post();
         $post->fill($data);
         $post->slug = $this->generateSlug($post->title);
+        $post->cover = 'storage/' . $cover;
         $post->save();
-
+        Mail::to('mail@mail.it')->send(new SendNewMail());
         return redirect()->route('admin.posts.index');
     }
 
@@ -84,12 +94,18 @@ class PostController extends Controller
         $request->validate([
         'category_id' => 'exists:categories,id|nullable',
         'title'=>'required|string|max:255',
-        'content'=> 'required|string'
+        'content'=> 'required|string',
+        'cover' => 'image|max:200|nullable'
+
+
     ]);
 
         $data = $request->all();
-
         $data['slug'] = $this->generateSlug($data['title'], $post->title != $data['title'], $post->slug);
+        if (array_key_exists('cover', $data)) {
+            $cover = Storage::put('uploads', $data['cover']);
+            $data['cover'] = 'storage/' . $cover;
+        }
         $post->update($data);
 
 
