@@ -21,7 +21,7 @@
                 <li><a href="#">Tags</a></li>
             </ul>
         </div>
-    </div> 
+    </div>
 
     <div class="col-10 text-center pt-4">
 
@@ -45,12 +45,20 @@
                             <div class="">
                                 <a class="btn btn-info" href="{{route('admin.posts.show', ['post' => $post->id])}}">Show</a>
                             </div>
-                            <div class="">
-                                <a class="btn btn-info" href="{{route('admin.posts.destroy', ['post' => $post->id])}}">Delete</a>
-                            </div>
+
                             <div class="">
                                 <a class="btn btn-info" href="{{route('admin.posts.edit', ['post' => $post->id])}}">Edit</a>
                             </div>
+
+                            <div class="">
+                                <a class="btn btn-danger" onclick="event.preventDefault();
+                                  this.nextElementSibling.submit();">Delete</a>
+                                <form action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                            </div>
+
                         </div>
                     </div>
 
